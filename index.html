@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Configurações - FasiComércio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul: #335e9e;
+            --branco: #ffffff;
+            --cinza: #d9d9d9;
+            --fonte-bold: 'Montserrat', sans-serif;
+            --fonte-regular: 'Montserrat', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--fonte-regular);
+            background-color: var(--cinza);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background: var(--azul);
+            color: var(--branco);
+            padding: 10px 20px;
+        }
+
+        header img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            font-family: var(--fonte-bold);
+            font-size: 20px;
+        }
+
+        /* Layout principal */
+        main {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Menu lateral */
+        .sidebar {
+            width: 200px;
+            background: var(--branco);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 1px solid #ccc;
+        }
+
+        .sidebar button {
+            background: var(--cinza);
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            width: 100%;
+            margin: 6px 0;
+            font-weight: bold;
+            color: var(--azul);
+            cursor: pointer;
+            text-align: left;
+            padding-left: 15px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .sidebar button:hover:not(.selected-button) {
+            background: #c3c3c3;
+        }
+        
+        /* Estilo para o botão selecionado */
+        .sidebar button.selected-button {
+            background: var(--azul) !important;
+            color: var(--branco) !important;
+        }
+
+        .sidebar .sair {
+            margin-top: auto;
+            background: var(--azul);
+            color: var(--branco);
+        }
+
+        /* Conteúdo central */
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .config-card {
+            background: var(--branco);
+            border-radius: 12px;
+            padding: 30px;
+            width: 500px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .config-card h2 {
+            text-align: center;
+            color: var(--azul);
+            font-family: var(--fonte-bold);
+            margin-bottom: 20px;
+        }
+
+        .config-card label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: var(--azul);
+        }
+
+        .config-card input,
+        .config-card select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            font-family: var(--fonte-regular);
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .buttons button {
+            flex: 1;
+            margin: 5px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .save {
+            background: var(--azul);
+            color: var(--branco);
+        }
+
+        .reset {
+            background: #f44336;
+            color: var(--branco);
+        }
+
+        .report {
+            background: #4caf50;
+            color: #fff;
+        }
+
+        header, button {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img id="logo" src="img/LOGO FASICOMERCIO.png" alt="Logo">
+        <h1 id="titulo">FasiComércio</h1>
+    </header>
+
+    <main>
+        <div class="sidebar">
+            <button id="btnInicio">Início</button>
+            <button id="btnProdutos">Produtos</button>
+            <button id="btnMeusPedidos">Meus Pedidos</button>
+            <button id="btnPerfil">Perfil</button>
+            <button id="btnConfiguracoes">Configurações</button>
+            <button id="btnEstoque">Estoque</button>
+            <button class="sair" id="btnSair">Sair</button>
+        </div>
+
+        <div class="content">
+            <div class="config-card">
+                <h2>Configurações</h2>
+
+                <label for="corPicker">Cor do sistema:</label>
+                <input type="color" id="corPicker">
+
+                <label for="logoInput">Logo do sistema:</label>
+                <input type="file" id="logoInput" accept="image/*">
+
+                <label for="tituloInput">Título do sistema:</label>
+                <input type="text" id="tituloInput" placeholder="Digite o título">
+
+                <label for="fonteSelect">Fonte:</label>
+                <select id="fonteSelect">
+                    <option value="Arial, sans-serif">Arial</option>
+                    <option value="Roboto, sans-serif">Roboto</option>
+                    <option value="Times New Roman, serif">Times New Roman</option>
+                    <option value="Montserrat, sans-serif">Montserrat</option>
+                    <option value="Courier New, monospace">Courier New</option>
+                </select>
+
+                <label for="idiomaSelect">Idioma:</label>
+                <select id="idiomaSelect">
+                    <option value="pt">Português</option>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                </select>
+
+                <div class="buttons">
+                    <button class="save" id="btnSalvar">Salvar</button>
+                    <button class="reset" id="btnResetar">Restaurar Padrão</button>
+                    <button class="report" id="btnRelatorio">Relatório</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Traduções
+        const traducoes = {
+            pt: {
+                inicio: "Início",
+                produtos: "Produtos",
+                pedidos: "Meus Pedidos",
+                perfil: "Perfil",
+                configuracoes: "Configurações",
+                estoque: "Estoque",
+                sair: "Sair",
+                corSistema: "Cor do sistema:",
+                logoSistema: "Logo do sistema:",
+                tituloSistema: "Título do sistema:",
+                fonte: "Fonte:",
+                idioma: "Idioma:",
+                salvar: "Salvar",
+                resetar: "Restaurar Padrão"
+            },
+            en: {
+                inicio: "Home",
+                produtos: "Products",
+                pedidos: "My Orders",
+                perfil: "Profile",
+                configuracoes: "Settings",
+                estoque: "Stock",
+                sair: "Logout",
+                corSistema: "System color:",
+                logoSistema: "System logo:",
+                tituloSistema: "System title:",
+                fonte: "Font:",
+                idioma: "Language:",
+                salvar: "Save",
+                resetar: "Reset"
+            },
+            es: {
+                inicio: "Inicio",
+                produtos: "Productos",
+                pedidos: "Mis Pedidos",
+                perfil: "Perfil",
+                configuracoes: "Configuración",
+                estoque: "Inventario",
+                sair: "Salir",
+                corSistema: "Color del sistema:",
+                logoSistema: "Logo del sistema:",
+                tituloSistema: "Título del sistema:",
+                fonte: "Fuente:",
+                idioma: "Idioma:",
+                salvar: "Guardar",
+                resetar: "Restaurar"
+            }
+        };
+
+        const DEFAULT_BG_COLOR = "#335e9e";
+        const DEFAULT_TITLE = "FasiComércio";
+        const DEFAULT_FONT = "Montserrat, sans-serif";
+        const DEFAULT_LANG = "pt";
+        const DEFAULT_SELECTED_BUTTON_ID = "btnConfiguracoes";
+
+        // ---------- Elementos ----------
+        const body = document.body;
+        const logo = document.getElementById("logo");
+        const titulo = document.getElementById("titulo");
+        const corPicker = document.getElementById("corPicker");
+        const logoInput = document.getElementById("logoInput");
+        const tituloInput = document.getElementById("tituloInput");
+        const fonteSelect = document.getElementById("fonteSelect");
+        const idiomaSelect = document.getElementById("idiomaSelect");
+        const btnSalvar = document.getElementById("btnSalvar");
+        const btnResetar = document.getElementById("btnResetar");
+        const btnRelatorio = document.getElementById("btnRelatorio");
+        const sidebarButtons = document.querySelectorAll(".sidebar button");
+
+        // ---------- Helpers de logs ----------
+        function getLogs() {
+            return JSON.parse(localStorage.getItem("configLogs") || "[]");
+        }
+        function setLogs(logs) {
+            localStorage.setItem("configLogs", JSON.stringify(logs));
+        }
+
+        function addLogEntry(action, changes) {
+            const logs = getLogs();
+            const entry = {
+                action,
+                timestamp: new Date().toISOString(),
+                changes
+            };
+            logs.push(entry);
+            setLogs(logs);
+        }
+
+       
+        function pintarHeaderEBotoes(cor) {
+            document.querySelector("header").style.backgroundColor = cor;
+            document.querySelector("header h1").style.color = "#fff";
+            document.querySelector(".save").style.backgroundColor = cor;
+            document.querySelector(".save").style.color = "#fff";
+        }
+
+        // ---------- Função de idioma ----------
+        function aplicarIdioma(lang) {
+            const t = traducoes[lang];
+
+            const btns = document.querySelectorAll(".sidebar button");
+            if (btns && btns.length >= 7) {
+                btns[0].textContent = t.inicio;
+                btns[1].textContent = t.produtos;
+                btns[2].textContent = t.pedidos;
+                btns[3].textContent = t.perfil;
+                btns[4].textContent = t.configuracoes;
+                btns[5].textContent = t.estoque;
+                btns[6].textContent = t.sair;
+            }
+
+            const mapLabel = {
+                corPicker: t.corSistema,
+                logoInput: t.logoSistema,
+                tituloInput: t.tituloSistema,
+                fonteSelect: t.fonte,
+                idiomaSelect: t.idioma
+            };
+
+            Object.keys(mapLabel).forEach(idFor => {
+                const label = document.querySelector(`label[for="${idFor}"]`);
+                if (label) label.textContent = mapLabel[idFor];
+            });
+
+            document.querySelector(".save").textContent = t.salvar;
+            document.querySelector(".reset").textContent = t.resetar;
+        }
+        
+        // ---------- Função para aplicar a seleção de botão ----------
+        function selectButton(buttonId) {
+            sidebarButtons.forEach(btn => btn.classList.remove("selected-button"));
+            const selectedBtn = document.getElementById(buttonId);
+            if (selectedBtn) {
+                selectedBtn.classList.add("selected-button");
+            }
+        }
+
+        // ---------- Aplicar configurações salvas ----------
+        function aplicarConfiguracoes(config) {
+            if (!config) return;
+            if (config.bgColor) pintarHeaderEBotoes(config.bgColor);
+            if (config.logo) logo.src = config.logo;
+            if (config.titulo) titulo.textContent = config.titulo;
+
+            if (config.fonte) {
+                body.style.fontFamily = config.fonte;
+                document.querySelector("header h1").style.fontFamily = config.fonte;
+                document.querySelectorAll("button").forEach(btn => btn.style.fontFamily = config.fonte);
+                document.querySelectorAll("label, input, select").forEach(el => el.style.fontFamily = config.fonte);
+            }
+
+            if (config.idioma) aplicarIdioma(config.idioma);
+        }
+
+        // ---------- Utilitários de export ----------
+        function escapeXml(unsafe) {
+            if (unsafe === null || unsafe === undefined) return "";
+            return String(unsafe)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&apos;");
+        }
+
+        function downloadFile(filename, content, mimeType = "text/plain;charset=utf-8") {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        }
+
+        function buildTxtReport(logs) {
+            if (!logs || logs.length === 0) return "Relatório vazio. Nenhuma alteração registrada.";
+            let out = "";
+            logs.forEach((entry, idx) => {
+                out += `----- Entrada ${idx + 1} -----\n`;
+                out += `Ação: ${entry.action}\n`;
+                out += `Timestamp: ${entry.timestamp}\n`;
+                if (entry.changes && entry.changes.length) {
+                    entry.changes.forEach(ch => {
+                        out += ` - Campo: ${ch.field}\n`;
+                        out += `   Antigo: ${ch.oldValue}\n`;
+                        out += `   Novo:   ${ch.newValue}\n`;
+                    });
+                } else {
+                    out += " - Sem alterações detalhadas.\n";
+                }
+                out += `\n`;
+            });
+            return out;
+        }
+
+        function buildXmlReport(logs) {
+            const header = '<?xml version="1.0" encoding="UTF-8"?>\n';
+            if (!logs || logs.length === 0) return header + "<logs></logs>";
+            let xml = header + "<logs>\n";
+            logs.forEach(entry => {
+                xml += `  <entry action="${escapeXml(entry.action)}" timestamp="${escapeXml(entry.timestamp)}">\n`;
+                if (entry.changes && entry.changes.length) {
+                    xml += `    <changes>\n`;
+                    entry.changes.forEach(ch => {
+                        xml += `      <change>\n`;
+                        xml += `        <field>${escapeXml(ch.field)}</field>\n`;
+                        xml += `        <old>${escapeXml(ch.oldValue)}</old>\n`;
+                        xml += `        <new>${escapeXml(ch.newValue)}</new>\n`;
+                        xml += `      </change>\n`;
+                    });
+                    xml += `    </changes>\n`;
+                }
+                xml += `  </entry>\n`;
+            });
+            xml += "</logs>";
+            return xml;
+        }
+
+        // ---------- Função que detecta diferenças e grava log (usada no save) ----------
+        function detectAndLogChanges(oldConfig, newConfig) {
+            const fields = ["bgColor", "titulo", "fonte", "idioma", "logo"];
+            const changes = [];
+
+            fields.forEach(f => {
+                const oldVal = oldConfig && (oldConfig[f] !== undefined) ? oldConfig[f] : null;
+                const newVal = newConfig && (newConfig[f] !== undefined) ? newConfig[f] : null;
+
+                if (f === "logo") {
+                    const oldSize = oldVal ? String(oldVal.length) + " bytes" : "null";
+                    const newSize = newVal ? String(newVal.length) + " bytes" : "null";
+                    if (oldSize !== newSize) {
+                        changes.push({
+                            field: f,
+                            oldValue: oldSize,
+                            newValue: newSize
+                        });
+                    }
+                } else {
+                    if ((oldVal || "") !== (newVal || "")) {
+                        changes.push({
+                            field: f,
+                            oldValue: oldVal === null ? "null" : String(oldVal),
+                            newValue: newVal === null ? "null" : String(newVal)
+                        });
+                    }
+                }
+            });
+
+            if (changes.length > 0) {
+                addLogEntry("save", changes);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // ---------- Inicialização ----------
+        window.onload = () => {
+            const savedConfig = JSON.parse(localStorage.getItem("config")) || {};
+            aplicarConfiguracoes(savedConfig);
+
+            // Define os valores dos inputs com base na configuração salva ou nos padrões
+            corPicker.value = savedConfig.bgColor || DEFAULT_BG_COLOR;
+            tituloInput.value = savedConfig.titulo || DEFAULT_TITLE;
+            fonteSelect.value = savedConfig.fonte || DEFAULT_FONT;
+            idiomaSelect.value = savedConfig.idioma || DEFAULT_LANG;
+
+            // Seleciona o botão de configurações por padrão
+            selectButton(DEFAULT_SELECTED_BUTTON_ID);
+        };
+
+        // ---------- Salvar configurações (com verificação) ----------
+        btnSalvar.addEventListener("click", () => {
+            const newConfigBase = {
+                bgColor: corPicker.value,
+                titulo: tituloInput.value,
+                fonte: fonteSelect.value,
+                idioma: idiomaSelect.value
+            };
+
+            const oldConfig = JSON.parse(localStorage.getItem("config"));
+            const tempOldConfig = oldConfig ? oldConfig : {
+                bgColor: DEFAULT_BG_COLOR,
+                titulo: DEFAULT_TITLE,
+                fonte: DEFAULT_FONT,
+                idioma: DEFAULT_LANG,
+                logo: logo.src 
+            };
+            
+
+            const file = logoInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    newConfigBase.logo = reader.result;
+                    if (detectAndLogChanges(tempOldConfig, newConfigBase)) {
+                        localStorage.setItem("config", JSON.stringify(newConfigBase));
+                        aplicarConfiguracoes(newConfigBase);
+                        alert("Configurações salvas!");
+                    } else {
+                        alert("Nenhuma alteração detectada.");
+                    }
+                };
+                reader.readAsDataURL(file);
+            } else {
+                if (oldConfig && oldConfig.logo) {
+                    newConfigBase.logo = oldConfig.logo;
+                } else {
+                    newConfigBase.logo = tempOldConfig.logo; 
+                }
+                
+                if (detectAndLogChanges(tempOldConfig, newConfigBase)) {
+                    localStorage.setItem("config", JSON.stringify(newConfigBase));
+                    aplicarConfiguracoes(newConfigBase);
+                    alert("Configurações salvas!");
+                } else {
+                    alert("Nenhuma alteração detectada.");
+                }
+            }
+        });
+
+        // ---------- Resetar configurações (com log) ----------
+        btnResetar.addEventListener("click", () => {
+            const oldConfig = JSON.parse(localStorage.getItem("config")) || {};
+            const changes = [];
+            ["bgColor", "titulo", "fonte", "idioma", "logo"].forEach(f => {
+                const oldVal = oldConfig && oldConfig[f] ? (f === "logo" ? String(oldConfig[f].length) + " bytes" : String(oldConfig[f])) : "null";
+                changes.push({
+                    field: f,
+                    oldValue: oldVal,
+                    newValue: "reset (padrão)"
+                });
+            });
+            addLogEntry("reset", changes);
+
+            localStorage.removeItem("config");
+            alert("Configurações restauradas ao padrão.");
+            location.reload();
+        });
+
+        // ---------- Baixar relatório ----------
+        btnRelatorio.addEventListener("click", () => {
+            const logs = getLogs();
+            if (!logs || logs.length === 0) {
+                alert("Nenhum log disponível para exportar.");
+                return;
+            }
+
+            let formato = prompt("Formato do relatório (digite 'txt' ou 'xml'):", "txt");
+            if (!formato) return;
+            formato = formato.trim().toLowerCase();
+            if (formato !== "txt" && formato !== "xml") {
+                alert("Formato inválido. Use 'txt' ou 'xml'.");
+                return;
+            }
+
+            if (formato === "txt") {
+                const content = buildTxtReport(logs);
+                downloadFile(`relatorio_alteracoes_${new Date().toISOString().slice(0, 19).replace(/[:T]/g, "-")}.txt`, content, "text/plain;charset=utf-8");
+            } else {
+                const content = buildXmlReport(logs);
+                downloadFile(`relatorio_alteracoes_${new Date().toISOString().slice(0, 19).replace(/[:T]/g, "-")}.xml`, content, "application/xml;charset=utf-8");
+            }
+        });
+
+        // ---------- Evento de clique para os botões do menu lateral ----------
+        sidebarButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                selectButton(btn.id);
+            });
+        });
+
+    </script>
+</body>
+</html>
